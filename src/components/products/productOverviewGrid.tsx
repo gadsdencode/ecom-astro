@@ -47,10 +47,11 @@ export default function ProductOverview({
           }
 
           <form action="" method="post">
-            {(price.length != 0) && 
+          {(price || price === 0) && 
               <div className="d-flex">
                 <h3 className="font-weight-normal">${price.toLocaleString()}</h3>
-                <input className="opacity-0" defaultValue={price} />
+                <label htmlFor='priceInput' className="font-weight-normal">L</label>
+                <input id='priceInput' type='number' className="opacity-0" defaultValue={price} />
               </div>
             }
 

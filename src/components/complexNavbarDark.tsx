@@ -1,7 +1,13 @@
 import data from '../../public/data.json';
 import CardCategory from './products/cardCategory';
 
+const focused = (element: any) => {
+  console.log("Input is focused:", element);
+};
 
+const defocused = (element: any) => {
+  console.log("Input lost focus:", element);
+};
 const ComplexNavbarDark = () => {
   return (
     <nav className="top-0 flex-wrap px-0 py-0 d-none d-lg-block navbar bg-slate-900 navbar-expand-lg">
@@ -146,10 +152,9 @@ const ComplexNavbarDark = () => {
                 {data.categories.slice(0, 2).map(category => 
                   <div className="col-md-6">
                     <CardCategory
-                      thumb_src = {category.thumb_src}
-                      title = {category.title}
-                      collection = {category.collection}
-                    />
+                      thumb_src={category.thumb_src}
+                      title={category.title}
+                      collection={category.collection} classList={''} cta={''}                    />
                   </div>
                 )}
               </div>
@@ -178,7 +183,9 @@ const ComplexNavbarDark = () => {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
               </svg>
             </span>
-            <input type="text" className="form-control max-width-200 border-dark bg-dark" placeholder="Search" onfocus="focused(this)" onfocusout="defocused(this)" />
+            <input type="text" className="form-control max-width-200 border-dark bg-dark" placeholder="Search" 
+               onFocus={(e) => focused(e.currentTarget)} 
+               onBlur={(e) => defocused(e.currentTarget)} />
           </div>
         </div>
       </div>

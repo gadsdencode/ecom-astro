@@ -1,7 +1,13 @@
 import data from '../../public/data.json';
 import CardCategory from './products/cardCategory';
 
+const focused = (element: any) => {
+  console.log("Input is focused:", element);
+};
 
+const defocused = (element: any) => {
+  console.log("Input lost focus:", element);
+};
 const ComplexNavbar = () => {
   return (
     <nav className="top-0 flex-wrap px-0 py-0 d-none d-lg-block navbar shadow navbar-expand-lg">
@@ -95,8 +101,8 @@ const ComplexNavbar = () => {
                       <div className="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg">
                           <title>credit-card</title>
-                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                          <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fillRule="nonzero">
                               <g transform="translate(1716.000000, 291.000000)">
                                 <g transform="translate(453.000000, 454.000000)">
                                   <path className="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
@@ -142,17 +148,19 @@ const ComplexNavbar = () => {
               Store
             </a>
             <ul className="dropdown-menu dropdown-xxl" aria-labelledby="dropdownProfile" data-bs-popper="static">
-              <div className="row m-3">
-                {data.categories.slice(0, 3).map(category => 
-                  <div className="col-md-4">
-                    <CardCategory
-                      thumb_src = {category.thumb_src}
-                      title = {category.title}
-                      collection = {category.collection}
-                    />
-                  </div>
-                )}
-              </div>
+            <div className="row m-3">
+  {data.categories.slice(0, 3).map((category, index) => 
+    <div className="col-md-4" key={index}>
+      <CardCategory
+        thumb_src={category.thumb_src}
+        title={category.title}
+        collection={category.collection}
+        classList={''}
+        cta={''}
+      />
+    </div>
+  )}
+</div>
             </ul>
           </li>
           <li className="nav-item dropdown px-3 py-3 border-radius-sm d-flex align-items-center">
@@ -174,11 +182,13 @@ const ComplexNavbar = () => {
         <div className="p-0 ms-md-auto d-flex align-items-center">
           <div className="input-group">
             <span className="input-group-text">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="opacity-8">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="opacity-8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
               </svg>
             </span>
-            <input type="text" className="form-control max-width-200" placeholder="Search" onfocus="focused(this)" onfocusout="defocused(this)" />
+            <input type="text" className="form-control max-width-200" placeholder="Search" 
+               onFocus={(e) => focused(e.currentTarget)} 
+               onBlur={(e) => defocused(e.currentTarget)} />
           </div>
         </div>
       </div>
